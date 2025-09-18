@@ -1,0 +1,232 @@
+/* ============================================= */
+/* RESET E VARIÁVEIS GLOBAIS                     */
+/* ============================================= */
+:root {
+    --azul-marinho: #0A192F;
+    --azul-celeste: #88C0D0;
+    --branco: #FFFFFF;
+    /* Fonte principal agora é Poppins */
+    --font-principal: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Scroll padrão do navegador */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--azul-marinho);
+    color: var(--branco);
+    font-family: var(--font-principal);
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 0;
+}
+
+h1, h2 {
+    font-family: var(--font-principal);
+    font-weight: 700; /* Deixa os títulos mais pesados */
+}
+
+/* ============================================= */
+/* SEÇÃO 1: HERO                                 */
+/* ============================================= */
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--azul-marinho);
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(136, 192, 208, 0.2); 
+    background-blend-mode: overlay;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+#hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--branco);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#hero p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: var(--branco);
+    margin-top: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* ============================================= */
+/* SEÇÃO 2: MOSAICO                              */
+/* ============================================= */
+#mosaic {
+    background-color: var(--azul-marinho);
+}
+
+#mosaic h2 {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 4rem;
+    color: var(--azul-celeste);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.grid-item {
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--azul-celeste);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    padding: 1rem;
+    text-align: center;
+}
+
+.grid-item .icon {
+    width: 48px;
+    height: 48px;
+    color: var(--branco);
+    opacity: 1;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.grid-item p {
+    font-size: 1.1rem;
+    color: var(--branco);
+    transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+    border-color: var(--branco);
+    transform: translateY(-10px);
+    /* Sombra mais forte */
+    box-shadow: 0 15px 30px rgba(136, 192, 208, 0.15);
+}
+
+.grid-item:hover .icon {
+    transform: scale(1.1);
+}
+
+.grid-item:hover p {
+    transform: scale(1.05);
+}
+
+/* ============================================= */
+/* SEÇÃO 3: GALERIA                              */
+/* ============================================= */
+#gallery {
+    background-color: var(--branco);
+    color: var(--azul-marinho);
+}
+
+#gallery h2 {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: 4rem;
+    color: var(--azul-marinho);
+}
+
+/* Layout alterado para CSS Grid para permitir que um item ocupe mais espaço */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Cria 2 colunas */
+    grid-auto-rows: 250px; /* Define uma altura base para as linhas */
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 100%;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    /* Sombra mais forte */
+    box-shadow: 0 8px 25px rgba(10, 25, 47, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.03);
+    /* Sombra mais forte no hover */
+    box-shadow: 0 12px 35px rgba(10, 25, 47, 0.25);
+}
+
+/* Classe especial para o item destacado */
+.gallery-item--large {
+    grid-row: span 2; /* Faz o item ocupar 2 linhas de altura */
+}
+
+/* ============================================= */
+/* RESPONSIVIDADE                                */
+/* ============================================= */
+@media (max-width: 960px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Em telas menores, a galeria vira uma coluna única */
+    .gallery-container {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 350px; /* Ajusta a altura da linha para mobile */
+    }
+    
+    /* Reseta o span para não criar espaços vazios em mobile */
+    .gallery-item--large {
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 4rem 0;
+    }
+    
+    #mosaic h2, #gallery h2 {
+        margin-bottom: 2.5rem;
+    }
+}
